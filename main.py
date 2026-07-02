@@ -55,8 +55,26 @@ def hunt_down_benders():
         print("Shock gloves activated! You stripped a rogue bender of their elements. Amon is pleased.")
 
     else:
-            print("Huhhhhhhhh you got ambushed by the fire benders!!!")
-            print("cabbage man: Haaaaaaaaa not my cabbages :( ")
+            ambush_scenarios = [
+
+                                {"bender_type": "earth_bender",
+                                "lore_text": "Cabbage Merchant: 'MY CABBAGES!!! This place is worse than Omashu! You savages will pay for this!"},
+
+                                {"bender_type": "fire_bender",
+                                "lore_text": "Random citizen nearby: *Uncontrollable screaming while foaming at the mouth and fainting backwards*"},
+
+                                {"bender_type": "fire_bender",
+                                "lore_text": "Uncle Iroh: *I know you’re not supposed to cry over spilled tea, but it’s just so sad!a*"},
+
+                                {"bender_type": "air_bender",
+                                "lore_text": "Tenzin in the distance: Is anyone going to explain why my peaceful acolytes are street-brawling again?!"}
+
+                                ]
+
+            current_ambush = random.choice(ambush_scenarios)
+
+            print(f"Huhhhhh you got ambushed by the {current_ambush['bender_type']}")
+            print(f"{current_ambush['lore_text']}")
 
             if len(player["inventory"]) > 0:
                 smashed_gear = random.choice(player["inventory"])
