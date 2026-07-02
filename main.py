@@ -1,3 +1,5 @@
+import random
+
 print("Welcome to the streets of Republic City, Equalist Vigilante..")
 
 def action_logger(func):
@@ -43,10 +45,35 @@ def hunt_down_benders():
     print("\n >***> Hunting down benders :) >***>")
     if player["health"] < 20:
         raise ValueError("Too weak to hunt!! Visit the temple first..")
-    player["health"] -= 20
-    player["yuans"] += 40
 
-    print("Shock gloves activated! You stripped a rogue bender of their elements. Amon is pleased.")
+    roll = random.randint(1, 100)
+
+    if roll <= 70:
+        player["health"] -= 20
+        player["yuans"] += 10
+
+        print("Shock gloves activated! You stripped a rogue bender of their elements. Amon is pleased.")
+
+    else:
+            print("Huhhhhhhhh you got ambushed by the fire benders!!!")
+            print("cabbage man: Haaaaaaaaa not my cabbages :( ")
+
+            if len(player["inventory"]) > 0:
+                smashed_gear = random.choice(player["inventory"])
+                player["inventory"].remove(smashed_gear)
+
+                print(f"\nhaha your precious '{smashed_gear} weapon' has been destroyed by elemental bending lolzzzzz")
+            print("\n ---- Republic City Holding Cell ----")
+            print("Guard: Yooo my man the judge is planning on sending you to the Boiling Rock prison!\n "
+                    "But i can help you break out if you have 10 yuan to spare for my pregnant wife. ")
+
+            if player["yuans"] >=10:
+                player["yuans"] -= 10
+                print("\nGuard: He was a shadow in the night no one could explain how he escaped the cell.")
+
+            else:
+                print("\nGuard: Well my friend get ready to be sent to the Boiling Rock prison where your eyes will be boiled out!")
+                exit()
 
 @action_logger
 def visit_amon_portal():
