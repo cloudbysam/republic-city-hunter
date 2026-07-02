@@ -1,5 +1,13 @@
 print("Welcome to the streets of Republic City, Equalist Vigilante..")
 
+def action_logger(func):
+    def wrapper(*args, **kwargs):
+        print(f"\n [EQUALIST NETWORK]: Initiating {func.__name__.replace('_', ' ').title()}...")
+        result = func(*args, **kwargs)
+        print(f"\n [EQUALIST NETWORK]: {func.__name__.replace('_', ' ').title()} completed.")
+        return result
+    return wrapper
+
 player = {
     'name' : input("enter player name: ").capitalize(),
     'health' : 30,
@@ -15,6 +23,7 @@ def show_status():
      print(f"Inventory: {','.join(player['inventory'])}")
      print("-----------------------------")
 
+@action_logger
 def visit_underground_hideout():
     print("\n Slip into the Republic City underground tunnels... undetected.")
     remains = player["yuans"]
@@ -29,8 +38,9 @@ def visit_underground_hideout():
 
     print(" Wounds patched up by Equalist medics! Cost: 15 Yuans.")
 
+@action_logger
 def hunt_down_benders():
-    print("\n ^***^ Hunting down benders :) ^***^")
+    print("\n >***> Hunting down benders :) >***>")
     if player["health"] < 20:
         raise ValueError("Too weak to hunt!! Visit the temple first..")
     player["health"] -= 20
@@ -38,6 +48,7 @@ def hunt_down_benders():
 
     print("Shock gloves activated! You stripped a rogue bender of their elements. Amon is pleased.")
 
+@action_logger
 def visit_amon_portal():
     print("Welcome to Amon-Temple Hunter here is the gear. Choose your choice :). ")
     print("1. Smoke Bomb Pack - (30 Yuans) ")
