@@ -41,6 +41,35 @@ def visit_underground_hideout():
 
     print(" Wounds patched up by Equalist medics! Cost: 15 Yuans.")
 
+
+def face_avatar():
+    print("\n💥 🌪️ 🌊 🔥 THE AVATAR STATE 🔥 🌊 🌪️ 💥")
+    print("Avatar Korra drops from the sky, crashing onto the pavement in front of you!")
+    print("'Korra: It's over, Equalist! You're terrorizing the city, and it stops tonight.'")
+
+    choose = input("\nWhat will you do?\n1. Fight the Avatar (30% success chance)\n2. Surrender peacefully\nChoice: ")
+
+    if choose == "1":
+        boss_roll = random.randint(1,100)
+        if boss_roll <= 30:
+            print("You defeated the avatar, the people of republic city are in awe!! what kind of power do u possess")
+            print("Amon rewards you with 200 credits!")
+
+            player["yuans"] += 200
+            player["health"] -= 10
+            player["notoriety"] = 0
+
+        else:
+            print("Korra triggers the Avatar State. You were completely overwhelmed. Your Equalist campaign ends here.")
+            exit()
+
+    elif choose == "2":
+        print("You were dragged away into high-security cells. The people of Republic city mock you!")
+
+        player["health"] = 20
+        player["inventory"] = []
+        player["notoriety"] = 0
+
 @action_logger
 def hunt_down_benders():
     print("\n >***> Hunting down benders :) >***>")
@@ -54,8 +83,8 @@ def hunt_down_benders():
         player["yuans"] += 10
         player["notoriety"] += 1
 
-        gear_used = random.choice(player["inventory"])
         if len(player["inventory"]) > 0:
+            gear_used = random.choice(player["inventory"])
             print(f"{gear_used} activated! You stripped a rogue bender of their elements. Amon is pleased.")
         else:
             print("shock gloves activated! You stripped a rogue bender of their elements. Amon is pleased.")
@@ -64,7 +93,7 @@ def hunt_down_benders():
         # 1. Check for the absolute max limit first!
         if player["notoriety"] == 5:
             print("\nBLUE SPIRIT ALERT! Avatar Korra has tracked your signature down!")
-        # face_avatar()
+            face_avatar()
 
         # 2. If they haven't hit 5 yet, check if they are getting close
         elif player["notoriety"] >= 3:
