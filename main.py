@@ -14,6 +14,7 @@ player = {
     'name' : input("enter player name: ").capitalize(),
     'health' : 30,
     'yuans' : 10,
+    'notoriety': 0,
     'inventory' : ['electric shock gloves']
  }
 
@@ -51,8 +52,24 @@ def hunt_down_benders():
     if roll <= 70:
         player["health"] -= 20
         player["yuans"] += 10
+        player["notoriety"] += 1
 
-        print("Shock gloves activated! You stripped a rogue bender of their elements. Amon is pleased.")
+        gear_used = random.choice(player["inventory"])
+        if len(player["inventory"]) > 0:
+            print(f"{gear_used} activated! You stripped a rogue bender of their elements. Amon is pleased.")
+        else:
+            print("shock gloves activated! You stripped a rogue bender of their elements. Amon is pleased.")
+        print(f"Current Notoriety: {player['notoriety']}/5")
+
+        # 1. Check for the absolute max limit first!
+        if player["notoriety"] == 5:
+            print("\nBLUE SPIRIT ALERT! Avatar Korra has tracked your signature down!")
+        # face_avatar()
+
+        # 2. If they haven't hit 5 yet, check if they are getting close
+        elif player["notoriety"] >= 3:
+            print("Your notoriety is spreading through the Republic City underground. You're drawing the Avatar's attention.")
+
 
     else:
             ambush_scenarios = [
